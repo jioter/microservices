@@ -12,11 +12,15 @@ import java.util.List;
 public class ConfigurationService {
     private final ConfigurationRepository configurationRepository;
 
-    public List<DeviceConfiguration> getAllConfigurations(){
+    public List<DeviceConfiguration> getAllConfigurations() {
         return configurationRepository.findAll();
     }
 
-    public void saveConfiguration(DeviceConfiguration deviceConfiguration){
+    public void saveConfiguration(DeviceConfiguration deviceConfiguration) {
         configurationRepository.save(deviceConfiguration);
+    }
+
+    public DeviceConfiguration getConfigurationBySerialNumber(String serialNum) {
+        return configurationRepository.findBySerialNum(serialNum);
     }
 }

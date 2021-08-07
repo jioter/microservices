@@ -14,12 +14,12 @@ public class DeviceController {
     private final DeviceService deviceService;
 
     @GetMapping
-    public List<Device> findAll(){
+    public List<Device> findAll() {
         return deviceService.getAllDevices();
     }
 
     @PostMapping
-    public void create(@RequestBody Device device){
+    public void create(@RequestBody Device device) {
         deviceService.addDevice(device);
     }
 }

@@ -13,6 +13,11 @@ import java.util.List;
 public class ConfigurationController {
     private final ConfigurationService configurationService;
 
+    @GetMapping("/{serialNum}")
+    public DeviceConfiguration getConfigurationBySerialNumber(@PathVariable String serialNum) {
+        return configurationService.getConfigurationBySerialNumber(serialNum);
+    }
+
     @GetMapping
     public List<DeviceConfiguration> findAll() {
         return configurationService.getAllConfigurations();
