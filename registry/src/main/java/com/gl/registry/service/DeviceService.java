@@ -28,7 +28,17 @@ public class DeviceService {
         deviceRepository.save(device);
     }
 
-    public List<Device> getAllDevices() {
-        return deviceRepository.findAll();
+    public List<Device> getAllDevices(String vendor, String model) {
+        if (vendor != null) {
+            return deviceRepository.findAllByVendor(vendor);
+        } else if (model != null) {
+            return deviceRepository.findAllByModel(model);
+        } else {
+            return deviceRepository.findAll();
+        }
+    }
+
+    public List<Device> getAllDevicesByVendor(String vendor) {
+        return deviceRepository.findAllByVendor(vendor);
     }
 }

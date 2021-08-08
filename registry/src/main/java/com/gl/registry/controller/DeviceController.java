@@ -14,8 +14,9 @@ public class DeviceController {
     private final DeviceService deviceService;
 
     @GetMapping
-    public List<Device> findAll() {
-        return deviceService.getAllDevices();
+    public List<Device> findAll(@RequestParam(required = false) String vendor,
+                                @RequestParam(required = false) String model) {
+        return deviceService.getAllDevices(vendor, model);
     }
 
     @PostMapping
