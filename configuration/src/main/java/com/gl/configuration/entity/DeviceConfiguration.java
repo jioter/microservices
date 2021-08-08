@@ -14,6 +14,7 @@ public class DeviceConfiguration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long conf_id;
+    @Column(unique = true)
     private String serialNum;
     private InetAddress ip;
     private InetAddress netmask;

@@ -16,6 +16,7 @@ public class Device {
     private Integer device_id;
     private String vendor;
     private String model;
+    @Column(unique = true)
     private String serialNum;
     private String mac;
     private InetAddress ip;
