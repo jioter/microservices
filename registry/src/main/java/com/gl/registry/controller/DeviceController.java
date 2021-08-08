@@ -23,4 +23,14 @@ public class DeviceController {
     public void create(@RequestBody Device device) {
         deviceService.addDevice(device);
     }
+
+    @GetMapping("/{id}")
+    public Device getById(@PathVariable Integer id){
+        return deviceService.getById(id);
+    }
+
+    @GetMapping("/serial-number/{serialNum}")
+    public Device findBySerialNum(@PathVariable String serialNum){
+        return deviceService.getBySerialNum(serialNum);
+    }
 }

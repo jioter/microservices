@@ -11,4 +11,6 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
     List<Device> findAllByVendor(String vendor);
 
     List<Device> findAllByModel(String model);
+
+    Device findBySerialNum(String serialNum);
 }

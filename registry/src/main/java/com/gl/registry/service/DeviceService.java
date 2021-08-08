@@ -41,4 +41,12 @@ public class DeviceService {
     public List<Device> getAllDevicesByVendor(String vendor) {
         return deviceRepository.findAllByVendor(vendor);
     }
+
+    public Device getById(Integer id) {
+        return deviceRepository.findById(id).get();
+    }
+
+    public Device getBySerialNum(String serialNum) {
+        return deviceRepository.findBySerialNum(serialNum);
+    }
 }
