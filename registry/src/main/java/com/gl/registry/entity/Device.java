@@ -13,12 +13,18 @@ import java.net.InetAddress;
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer device_id;
+    @Column(name = "device_id")
+    private Integer deviceId;
+    @Column(name = "vendor")
     private String vendor;
+    @Column(name = "model")
     private String model;
-    @Column(unique = true)
+    @Column(unique = true, name = "serial_number")
     private String serialNum;
+    @Column(name = "mac")
     private String mac;
+    @Column(name = "ip")
     private InetAddress ip;
+    @Column(name = "netmask")
     private InetAddress netmask;
 }

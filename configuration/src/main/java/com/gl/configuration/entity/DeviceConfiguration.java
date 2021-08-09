@@ -13,9 +13,12 @@ import java.net.InetAddress;
 public class DeviceConfiguration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long conf_id;
-    @Column(unique = true)
+    @Column(name = "conf_id")
+    private Long confId;
+    @Column(unique = true, name = "serial_number")
     private String serialNum;
+    @Column(name = "ip")
     private InetAddress ip;
+    @Column(name = "netmask")
     private InetAddress netmask;
 }

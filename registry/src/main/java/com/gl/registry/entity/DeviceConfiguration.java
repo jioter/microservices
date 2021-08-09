@@ -13,7 +13,8 @@ import java.net.InetAddress;
 public class DeviceConfiguration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long conf_id;
+    @Column(name = "conf_id")
+    private Long confId;
     @Column(unique = true)
     private String serialNum;
     private InetAddress ip;
