@@ -1,7 +1,8 @@
 package com.gl.registry.controller;
 
-import com.gl.registry.entity.Device;
 import com.gl.registry.service.DeviceService;
+import com.gl.registry.vo.DeviceRequestVO;
+import com.gl.registry.vo.DeviceResponseVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,23 +15,23 @@ public class DeviceController {
     private final DeviceService deviceService;
 
     @GetMapping
-    public List<Device> findAll(@RequestParam(required = false) String vendor,
-                                @RequestParam(required = false) String model) {
+    public List<DeviceResponseVO> findAll(@RequestParam(required = false) String vendor,
+                                          @RequestParam(required = false) String model) {
         return deviceService.getAllDevices(vendor, model);
     }
 
     @PostMapping
-    public void create(@RequestBody Device device) {
-        deviceService.addDevice(device);
+    public DeviceResponseVO create(@RequestBody DeviceRequestVO deviceRequestVO) {
+        return deviceService.addDevice(deviceRequestVO);
     }
 
     @GetMapping("/{id}")
-    public Device getById(@PathVariable Integer id){
+    public DeviceResponseVO getById(@PathVariable Integer id) {
         return deviceService.getById(id);
     }
 
     @GetMapping("/serial-number/{serialNum}")
-    public Device findBySerialNum(@PathVariable String serialNum){
+    public DeviceResponseVO findBySerialNum(@PathVariable String serialNum) {
         return deviceService.getBySerialNum(serialNum);
     }
 }
