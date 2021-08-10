@@ -2,6 +2,7 @@ package com.gl.registry.service;
 
 import com.gl.registry.entity.Device;
 import com.gl.registry.entity.DeviceConfiguration;
+import com.gl.registry.exeptions.EntityNotFoundException;
 import com.gl.registry.mapper.DeviceMapper;
 import com.gl.registry.repository.DeviceRepository;
 import com.gl.registry.vo.DeviceRequestVO;
@@ -24,7 +25,7 @@ public class DeviceService {
 
         ResponseEntity<DeviceConfiguration> getDeviceConfigurationBySerNum =
                 new RestTemplate().getForEntity(
-                        "http://localhost:8084/api/configuration/{device.getSerialNum()}",
+                        "http://localhost:8084/api/configuration/{request.getSerialNum()}",
                         DeviceConfiguration.class, request.getSerialNum());
 
         Device device = deviceMapper.toEntity(request);
@@ -46,10 +47,12 @@ public class DeviceService {
     }
 
     public DeviceResponseVO getById(Integer id) {
-        return deviceMapper.toVO(deviceRepository.findById(id).get());
+        return deviceMapper.toVO(deviceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Device.class, "id", id)));
     }
 
     public DeviceResponseVO getBySerialNum(String serialNum) {
-        return deviceMapper.toVO(deviceRepository.findBySerialNum(serialNum));
+        return deviceMapper.toVO(deviceRepository.findBySerialNum(serialNum).orElseThrow(() ->
+                new EntityNotFoundException(Device.class, "serial number", serialNum)));
     }
 }
