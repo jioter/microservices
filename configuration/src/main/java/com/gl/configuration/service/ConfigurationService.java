@@ -4,12 +4,14 @@ import com.gl.configuration.entity.DeviceConfiguration;
 import com.gl.configuration.exeptions.EntityNotFoundException;
 import com.gl.configuration.mapper.ConfigurationMapper;
 import com.gl.configuration.repository.ConfigurationRepository;
+import com.gl.configuration.validator.ConfigurationValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.gl.configuration.vo.DeviceConfigurationRequestVO;
 import com.gl.configuration.vo.DeviceConfigurationResponseVO;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,18 +19,21 @@ import java.util.stream.Collectors;
 public class ConfigurationService {
     private final ConfigurationRepository configurationRepository;
     private final ConfigurationMapper configurationMapper;
+    private final ConfigurationValidator configurationValidator;
 
     public List<DeviceConfigurationResponseVO> getAllConfigurations() {
         return configurationRepository.findAll().stream().map(configurationMapper::toVO).collect(Collectors.toList());
     }
 
     public DeviceConfigurationResponseVO createDeviceConfiguration(DeviceConfigurationRequestVO request) {
-        DeviceConfiguration existedDeviceConfiguration = configurationRepository.findBySerialNum(request.getSerialNum())
-                .orElseThrow(() -> new EntityNotFoundException(DeviceConfiguration.class, "serial number", request.getSerialNum()));
+        configurationValidator.validateCreate(request);
 
-        return existedDeviceConfiguration == null ? configurationMapper.toVO(configurationRepository
-                .save(configurationMapper.toEntity(request))) :
-                configurationMapper.toVO(existedDeviceConfiguration);
+        Optional<DeviceConfiguration> existedDeviceConfiguration = configurationRepository.findBySerialNum(request.getSerialNum());
+
+        return existedDeviceConfiguration.isPresent() ?
+                configurationMapper.toVO(existedDeviceConfiguration.get()) :
+                configurationMapper.toVO(configurationRepository
+                        .save(configurationMapper.toEntity(request)));
     }
 
     public DeviceConfigurationResponseVO getConfigurationBySerialNumber(String serialNum) {
