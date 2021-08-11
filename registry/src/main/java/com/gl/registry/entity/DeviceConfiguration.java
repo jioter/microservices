@@ -4,12 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.net.InetAddress;
 
 @Setter
 @Getter
 @Entity
-@Table(name="device_configuration")
+@Table(name = "device_configuration")
 public class DeviceConfiguration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +16,6 @@ public class DeviceConfiguration {
     private Long confId;
     @Column(unique = true)
     private String serialNum;
-    private InetAddress ip;
-    private InetAddress netmask;
+    private String ip;
+    private String netmask;
 }

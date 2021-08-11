@@ -7,7 +7,6 @@ import lombok.experimental.SuperBuilder;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.net.InetAddress;
 
 @Data
 @SuperBuilder
@@ -20,9 +19,9 @@ public class DeviceConfigurationBaseVO implements Serializable {
 
     @NotBlank
     @Size(min = 7, max = 15)
-    private InetAddress ip;
+    private String ip;
 
     @NotBlank
     @Size(min = 7, max = 15)
-    private InetAddress netmask;
+    private String netmask;
 }

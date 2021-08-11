@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.net.InetAddress;
 
 @Setter
 @Getter
@@ -24,7 +23,7 @@ public class Device {
     @Column(name = "mac")
     private String mac;
     @Column(name = "ip")
-    private InetAddress ip;
+    private String ip;
     @Column(name = "netmask")
-    private InetAddress netmask;
+    private String netmask;
 }

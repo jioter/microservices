@@ -25,7 +25,7 @@ class ConfigurationApplicationTests {
 
     @Test
     void shouldGetConfigurationBySerial() {
-        String serialNumber = "";
+        String serialNumber = "01ABCDEF01";
 
         Optional<DeviceConfiguration> expected = configurationRepository.findBySerialNum(serialNumber);
         DeviceConfigurationResponseVO actual = configurationService.getConfigurationBySerialNumber(serialNumber);

@@ -1,10 +1,10 @@
 package com.gl.configuration.controller;
 
 import com.gl.configuration.service.ConfigurationService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
 import com.gl.configuration.vo.DeviceConfigurationRequestVO;
 import com.gl.configuration.vo.DeviceConfigurationResponseVO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
