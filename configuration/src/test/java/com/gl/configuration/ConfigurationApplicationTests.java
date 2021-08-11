@@ -4,6 +4,7 @@ import com.gl.configuration.entity.DeviceConfiguration;
 import com.gl.configuration.exeptions.EntityNotFoundException;
 import com.gl.configuration.repository.ConfigurationRepository;
 import com.gl.configuration.service.ConfigurationService;
+import com.gl.configuration.vo.DeviceConfigurationRequestVO;
 import com.gl.configuration.vo.DeviceConfigurationResponseVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,33 @@ class ConfigurationApplicationTests {
         matchAll(expected, actual);
     }
 
+    @Test
+    void shouldCreateConfiguration(){
+        Long id = 1L;
+        String serialNumber = "01ABCDEF04";
+
+        DeviceConfigurationRequestVO configurationRequest = createConfigurationRequest();
+        DeviceConfigurationResponseVO configurationResponse = configurationService.createDeviceConfiguration(configurationRequest);
+
+        assertNotNull(configurationResponse);
+        assertEquals(id, configurationResponse.getConfId());
+        assertEquals(serialNumber, configurationResponse.getSerialNum());
+
+        matchOne(configurationRequest, configurationResponse);
+    }
+
+    private DeviceConfigurationRequestVO createConfigurationRequest() {
+        String serialNum  = "01ABCDEF04";
+        String ip = "192.168.0.104";
+        String netmask = "255.255.255.4";
+
+        return DeviceConfigurationRequestVO.builder()
+                .serialNum(serialNum)
+                .ip(ip)
+                .netmask(netmask)
+                .build();
+    }
+
     private void matchAll(List<DeviceConfiguration> expected, List<DeviceConfigurationResponseVO> actual) {
         assertNotNull(actual);
         assertEquals(expected.size(), actual.size());
@@ -63,9 +91,14 @@ class ConfigurationApplicationTests {
         }
     }
 
-
     private void matchOne(DeviceConfiguration expected, DeviceConfigurationResponseVO actual) {
         assertEquals(expected.getConfId(), actual.getConfId());
+        assertEquals(expected.getSerialNum(), actual.getSerialNum());
+        assertEquals(expected.getIp(), actual.getIp());
+        assertEquals(expected.getNetmask(), actual.getNetmask());
+    }
+
+    private void matchOne(DeviceConfigurationRequestVO expected, DeviceConfigurationResponseVO actual){
         assertEquals(expected.getSerialNum(), actual.getSerialNum());
         assertEquals(expected.getIp(), actual.getIp());
         assertEquals(expected.getNetmask(), actual.getNetmask());
