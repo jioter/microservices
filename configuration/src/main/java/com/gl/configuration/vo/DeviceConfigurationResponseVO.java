@@ -1,4 +1,4 @@
-package vo;
+package com.gl.configuration.vo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class DeviceConfigurationResponseVO extends DeviceConfigurationBaseVO {
 
     @NotNull
-    private Integer confId;
+    private Long confId;
 }
 
 

@@ -1,4 +1,4 @@
-package vo;
+package com.gl.configuration.vo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

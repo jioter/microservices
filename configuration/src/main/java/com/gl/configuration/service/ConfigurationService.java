@@ -6,8 +6,8 @@ import com.gl.configuration.mapper.ConfigurationMapper;
 import com.gl.configuration.repository.ConfigurationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import vo.DeviceConfigurationRequestVO;
-import vo.DeviceConfigurationResponseVO;
+import com.gl.configuration.vo.DeviceConfigurationRequestVO;
+import com.gl.configuration.vo.DeviceConfigurationResponseVO;
 
 import java.util.List;
 import java.util.stream.Collectors;

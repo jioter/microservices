@@ -3,8 +3,8 @@ package com.gl.configuration.controller;
 import com.gl.configuration.service.ConfigurationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import vo.DeviceConfigurationRequestVO;
-import vo.DeviceConfigurationResponseVO;
+import com.gl.configuration.vo.DeviceConfigurationRequestVO;
+import com.gl.configuration.vo.DeviceConfigurationResponseVO;
 
 import java.util.List;
 

@@ -18,7 +18,7 @@ import java.net.InetAddress;
 public class DeviceResponseVO extends DeviceBaseVO {
 
     @NotNull
-    private Integer deviceId;
+    private Long deviceId;
 
     @NotBlank
     @Size(min = 7, max = 15)
