@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
@@ -45,7 +45,23 @@ class ConfigurationApplicationTests {
         });
     }
 
+    @Test
+    void shouldGetAllConfigurations() {
+        List<DeviceConfigurationResponseVO> actual = configurationService.getAllConfigurations();
 
+        List<DeviceConfiguration> expected = configurationRepository.findAll();
+
+        matchAll(expected, actual);
+    }
+
+    private void matchAll(List<DeviceConfiguration> expected, List<DeviceConfigurationResponseVO> actual) {
+        assertNotNull(actual);
+        assertEquals(expected.size(), actual.size());
+
+        for (int i = 0; i < expected.size(); i++) {
+            matchOne(expected.get(i), actual.get(i));
+        }
+    }
 
 
     private void matchOne(DeviceConfiguration expected, DeviceConfigurationResponseVO actual) {
