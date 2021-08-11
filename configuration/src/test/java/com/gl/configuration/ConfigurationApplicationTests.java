@@ -1,6 +1,7 @@
 package com.gl.configuration;
 
 import com.gl.configuration.entity.DeviceConfiguration;
+import com.gl.configuration.exeptions.EntityNotFoundException;
 import com.gl.configuration.repository.ConfigurationRepository;
 import com.gl.configuration.service.ConfigurationService;
 import com.gl.configuration.vo.DeviceConfigurationResponseVO;
@@ -12,6 +13,8 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 @SpringBootTest
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:sql/configuration-init.sql")
@@ -32,6 +35,17 @@ class ConfigurationApplicationTests {
 
         matchOne(expected.get(), actual);
     }
+
+    @Test
+    void shouldThrowExceptionIfConfigurationNotFound() {
+        String serialNumber = "wrong_Id-892734";
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            configurationService.getConfigurationBySerialNumber(serialNumber);
+        });
+    }
+
+
 
 
     private void matchOne(DeviceConfiguration expected, DeviceConfigurationResponseVO actual) {
