@@ -1,0 +1,1 @@
+TRUNCATE TABLE device_configuration RESTART IDENTITY;

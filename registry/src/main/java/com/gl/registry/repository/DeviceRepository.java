@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface DeviceRepository extends JpaRepository<Device, Integer> {
+public interface DeviceRepository extends JpaRepository<Device, Long> {
     List<Device> findAllByVendor(String vendor);
 
     List<Device> findAllByModel(String model);

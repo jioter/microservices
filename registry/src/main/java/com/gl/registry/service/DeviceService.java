@@ -46,7 +46,7 @@ public class DeviceService {
         }
     }
 
-    public DeviceResponseVO getById(Integer id) {
+    public DeviceResponseVO getById(Long id) {
         return deviceMapper.toVO(deviceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Device.class, "id", id)));
     }
