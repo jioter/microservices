@@ -1,6 +1,7 @@
 package com.gl.registry;
 
 import com.gl.registry.entity.Device;
+import com.gl.registry.exeptions.EntityNotFoundException;
 import com.gl.registry.repository.DeviceRepository;
 import com.gl.registry.service.DeviceService;
 import com.gl.registry.vo.DeviceResponseVO;
@@ -12,6 +13,7 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:sql/device-init.sql")
@@ -34,13 +36,22 @@ class RegistryApplicationTests {
     }
 
     @Test
-    void shouldGetBySerialNumber(){
+    void shouldGetBySerialNumber() {
         String serialNumber = "03ABCDEF03";
 
         DeviceResponseVO actual = deviceService.getBySerialNum(serialNumber);
         Optional<Device> expected = deviceRepository.findBySerialNum(serialNumber);
 
-        matchOne(expected,actual);
+        matchOne(expected, actual);
+    }
+
+    @Test
+    void shouldThrowExceptionIfDeviceNotFoundBySerialNumber() {
+        String serialNumber = "not_correct_serial_number_123";
+
+        assertThrows(EntityNotFoundException.class, () -> {
+            deviceService.getBySerialNum(serialNumber);
+        });
     }
 
     private void matchOne(Optional<Device> expected, DeviceResponseVO actual) {
