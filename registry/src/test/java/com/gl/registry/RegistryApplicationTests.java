@@ -13,10 +13,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@SpringBootTest
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:sql/device-init.sql")
 @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:sql/clean-up.sql")
-@SpringBootTest
 class RegistryApplicationTests {
 
     @Autowired
@@ -32,6 +31,16 @@ class RegistryApplicationTests {
         Optional<Device> expected = deviceRepository.findById(id);
 
         matchOne(expected, actual);
+    }
+
+    @Test
+    void shouldGetBySerialNumber(){
+        String serialNumber = "03ABCDEF03";
+
+        DeviceResponseVO actual = deviceService.getBySerialNum(serialNumber);
+        Optional<Device> expected = deviceRepository.findBySerialNum(serialNumber);
+
+        matchOne(expected,actual);
     }
 
     private void matchOne(Optional<Device> expected, DeviceResponseVO actual) {

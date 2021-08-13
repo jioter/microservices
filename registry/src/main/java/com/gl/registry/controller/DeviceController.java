@@ -26,7 +26,7 @@ public class DeviceController {
     }
 
     @GetMapping("/{id}")
-    public DeviceResponseVO getById(@PathVariable Long id) {
+    public DeviceResponseVO findById(@PathVariable Long id) {
         return deviceService.getById(id);
     }
 
