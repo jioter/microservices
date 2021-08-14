@@ -22,7 +22,7 @@ public class DeviceController {
 
     @PostMapping
     public DeviceResponseVO create(@RequestBody DeviceRequestVO deviceRequestVO) {
-        return deviceService.addDevice(deviceRequestVO);
+        return deviceService.createDevice(deviceRequestVO);
     }
 
     @GetMapping("/{id}")

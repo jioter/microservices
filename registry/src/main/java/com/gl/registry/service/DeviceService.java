@@ -21,7 +21,7 @@ public class DeviceService {
     private final DeviceRepository deviceRepository;
     private final DeviceMapper deviceMapper;
 
-    public DeviceResponseVO addDevice(DeviceRequestVO request) {
+    public DeviceResponseVO createDevice(DeviceRequestVO request) {
 
         ResponseEntity<DeviceConfiguration> getDeviceConfigurationBySerNum =
                 new RestTemplate().getForEntity(
