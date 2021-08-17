@@ -4,6 +4,7 @@ import com.gl.registry.service.DeviceService;
 import com.gl.registry.vo.DeviceRequestVO;
 import com.gl.registry.vo.DeviceResponseVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +26,8 @@ public class DeviceController {
         return deviceService.createDevice(deviceRequestVO);
     }
 
-    @GetMapping("/{id}")
+//    @GetMapping("/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
     public DeviceResponseVO findById(@PathVariable Long id) {
         return deviceService.getById(id);
     }
